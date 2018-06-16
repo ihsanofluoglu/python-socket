@@ -1,0 +1,26 @@
+# -*- coding: cp1254 -*-
+import socket
+
+#
+# Kullanýlacak olan IP adresi ve port numarasý
+host = ''        
+port = 9999
+
+#
+# Servver olusturulup IP ve Port numarasý veriliyor..
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind((host, port))
+
+# Server çalýþtýrýp dinlemeye baþlýyor.
+s.listen(1)
+
+# Veriler alýnýyor.
+conn, addr = s.accept()
+print('Connected by', addr)
+while True:
+    data = conn.recv(1024)
+    if(data):
+    	print(str(data))
+    conn.sendall(data)
+    
+conn.close()

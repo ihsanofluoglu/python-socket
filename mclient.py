@@ -1,0 +1,16 @@
+# -*- coding: cp1254 -*-
+import socket
+
+# Server dosyasýnda ki baðlý port numarasýyla ayný port olmasý gerekiyor.
+host = socket.gethostname()    
+port = 9999
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((host, port))
+
+# baglantý saglandýktan sonra veriler gonderilebilir
+s.sendall(b'Hello, world\0')
+data = s.recv(1024)
+s.close()
+
+print('Received', repr(data))
